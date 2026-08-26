@@ -40,7 +40,7 @@ for (i in 1:nrow(BQ1_new)) {
   # K values in 9-week window
   K_values <- BQ1$K[
     BQ1$Sample_Date >= w1 &
-      BQ1$sample_Date < w2
+      BQ1$Sample_Date < w2
   ]
 
   # Find mean K values in 9-week window:
