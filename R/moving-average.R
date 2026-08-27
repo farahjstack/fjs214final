@@ -100,22 +100,27 @@ plot_data <- combined_dfs |>
       no3_mgl,
       nh4_mgl
     ),
-    names_to = "Ions",
-    values_to = "Concentration"
+    names_to = "Chemical",
+    values_to = "Moving_Average"
   )
-
-# graph ggplott!
 
 ggplot(
-  plot_data,
+  data = plot_data,
   mapping = aes(
-    x = window_start,
-    y = Concentration,
-    linetype = Site_Name
+    x = ,
+    y =
   )
 ) +
-  geom_line() +
-  facet_wrap("Ions", scales = "free", ncol = 1, strip.position = "left") +
-  labs(
-    title = "Concentrations in Bisley, Puerto Rico Streams Before and After Hurricane Hugo"
+geom_line() +
+labs(
+  title =
+    x = ,
+    y =
+) +
+scale_x_date(
+  limits = c(
+    ymd("1988-01-31"),
+    ymd("1994-12-31")
   )
+) + theme_minmimal()
+

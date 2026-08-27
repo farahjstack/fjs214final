@@ -1,31 +1,19 @@
-library(tidyverse)
-library(lubridate)
-
-# Import the four datasets separately
-BQ1 <- read_csv("data/QuebradaCuenca1-Bisley.csv")
-
-
-BQ2 <- read_csv("data/QuebradaCuenca2-Bisley.csv")
-
-
-BQ3 <- read_csv("data/QuebradaCuenca3-Bisley.csv")
-
-
-PRM <- read_csv("data/RioMameyesPuenteRoto.csv")
-
-# Create moving average function
 moving_average <- function(df) {
+  # Initialize a tibble to contain the results
+
   result <- tibble(
     window_start = seq(
       ymd(df$Sample_Date[1]),
       ymd(df$Sample_Date[nrow(df)]),
       by = "9 weeks"
     ),
+    #these are our new column names
     k_mgl = NA,
     mg_mgl = NA,
     ca_mgl = NA,
     no3_mgl = NA,
     nh4_mgl = NA
+    # Fill in the rest of the ions
   )
 
   # Fill in the iterator and sequence
@@ -68,54 +56,3 @@ moving_average <- function(df) {
   # Return the result
   return(result)
 }
-
-BQ1_new <- moving_average(BQ1)
-
-BQ2_new <- moving_average(BQ2)
-
-BQ3_new <- moving_average(BQ3)
-
-PRM_new <- moving_average(PRM)
-
-
-# Create Site_Name column for each dataframe
-BQ1_new <- BQ1_new |> mutate(Site_Name = "BQ1")
-
-BQ2_new <- BQ2_new |> mutate(Site_Name = "BQ2")
-
-BQ3_new <- BQ3_new |> mutate(Site_Name = "BQ3")
-
-PRM_new <- PRM_new |> mutate(Site_Name = "PRM")
-
-# Combine all dfs into a new df
-combined_dfs <- bind_rows(BQ1_new, BQ2_new, BQ3_new, PRM_new)
-
-# Place values of all sites and all chemistry values into one column:
-plot_data <- combined_dfs |>
-  pivot_longer(
-    cols = c(
-      k_mgl,
-      mg_mgl,
-      ca_mgl,
-      no3_mgl,
-      nh4_mgl
-    ),
-    names_to = "Ions",
-    values_to = "Concentration"
-  )
-
-# graph ggplott!
-
-ggplot(
-  plot_data,
-  mapping = aes(
-    x = window_start,
-    y = Concentration,
-    linetype = Site_Name
-  )
-) +
-  geom_line() +
-  facet_wrap("Ions", scales = "free", ncol = 1, strip.position = "left") +
-  labs(
-    title = "Concentrations in Bisley, Puerto Rico Streams Before and After Hurricane Hugo"
-  )

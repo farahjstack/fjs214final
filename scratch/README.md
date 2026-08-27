@@ -6,13 +6,13 @@ This repository contains the raw data and R code used to reproduce Figure 3 from
 
 This repository will be updated to reproduce the 9-week moving averages for the stream chemistry variables included in Figure 3:
 
-- Potassium 
-- Nitrate-N
-- Magnesium
-- Calcium
-- Ammonium-N
+- Potassium (K)
+- Nitrate (NO3)
+- Magnesium (Mg)
+- Calcium (Ca)
+- Ammonium (NH4)
 
-The analysis focuses on the period from 1988 through 1994, allowing us to examine changes in stream chemistry before and after Hurricane Hugo.
+The analysis focuses on the period from 1988 through 1994. This time period allows us to visualize patterns in stream-water chemistry surrounding Hurricane Hugo, which passed over Bisley, Puerto Rico.
 
 ## REPO CONTENTS
 The repository currently includes the raw stream chemistry data and the R code used for the analysis.
@@ -24,11 +24,7 @@ The four watershed datasets are represented in the analysis as:
 - BQ3 – Quebrada Cuenca 3-Bisley
 - PRM – RíoMameyesPuente Roto
 
-The analysis calculates 9-week moving averages of stream chemistry measurements and plots these averages over the period from 1988 – 1994.
-
-At this time, the repository includes an analysis and figure showing the 9-week moving average of potassium (K, mg/L)over time (1990 - 2020).
-
-The repository will be updated with analyses of nitrate-N, magnesium, calcium, and ammonium-N as the course progresses.
+The analysis calculates 9-week moving averages of stream chemistry variables and plots these averages over the period from 1988 – 1994.
 
 ## DETAILS REGARDING DATA ACCESS
 Data was downloaded from the Environmental Data Initiative (EDI) Data Portal. 
