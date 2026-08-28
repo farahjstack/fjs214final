@@ -1,5 +1,5 @@
 
-# Analysis, Code, and Data for 9-Week Moving Averages of Stream Chemistry Following Hurricane Hugo
+# Analysis, Code, and Data for 9-Week Moving Averages of Stream Chemistry in Puerto Rico Following Hurricane Hugo
 
 ## REPO'S PURPOSE
 This repository contains the raw data and R code used to reproduce Figure 3 from Schaefer et al. (2000). Figure 3 shows 9-week moving averages of stream-water chemistry before and after Hurricane Hugo across forested watersheds in the Luquillo Experimental Forest in Puerto Rico.

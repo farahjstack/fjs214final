@@ -21,7 +21,7 @@ The analysis focuses on the period from 1988 through 1994. This time period allo
 We use stream chemistry data from four sampling sites: Quebrada Cuenca 1 (BQ1), Quebrada Cuenca 2 (BQ2), Quebrada Cuenca 3 (BQ3), and Río Mameyes at Puente Roto (PRM). The data for each site are imported separately and analyzed using a moving-average function stored in Functions.R.
 
 # Methods
-Our analysis calculates 9-week moving averages of stream chemistry measurements and plots these averages over a time period from 1988-1994.
+Our analysis calculates 9-week moving averages of stream chemistry measurements and plots these averages over a time period from 1988-1994. First, a table was created with columns for each site (Q1, Q2, Q3, MPR), each chemical(k_mgl, mg_mgl, ca_mgl, no3_mgl, and nh4_mgl), and the start data for each 9-week window. Then, the average chemical concentration samples that fell within each 9-week window were added to the table. Finally, the table was plotted to match figure 3 from Schaefer et al. (2000).
 
 # Results
 Our results show the moving average of each chemistry variable over time (1988-1994).
