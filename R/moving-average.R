@@ -1,8 +1,8 @@
 moving_average <- function(df) {
   result <- tibble(
     window_start = seq(
-      ymd("1988-01-01"),
-      ymd("1994-12-31"),
+      df$Sample_Date[1],
+      df$Sample_Date[nrow(df)],
       by = "9 weeks"
     ),
     Site_Name = df$Sample_ID[1],
@@ -13,27 +13,24 @@ moving_average <- function(df) {
     nh4_mgl = NA
   )
 
-  # Fill in the iterator and sequence
+  # Move throgh each 9-week period so concentrations can be summarized across the fully study period.
   for (i in 1:nrow(result)) {
-    # Create variables for the start and end of the current window
     w1 <- result$window_start[i]
     w2 <- w1 + weeks(9)
 
-    # Create a logical vector, called "in_window",
-    # that says which samples are inside the window
-    # Hint: you'll compare sample dates to the start and end of the window
+    # Identify samples collected during the current window so only those observations contribute to that period's average.
     in_window <- df$Sample_Date >= w1 &
       df$Sample_Date < w2
 
-    # Use indexing to pull out the ion concentrations that fall inside the window
+    # Store the chemistry measurements from the same time window separtely so an average can be calculated for each ion.
     k_window <- df$K[in_window]
     mg_window <- df$Mg[in_window]
     ca_window <- df$Ca[in_window]
     no3_window <- df$'NO3-N'[in_window]
     nh4_window <- df$'NH4-N'[in_window]
 
-    # The line above gets potassium in the window. Get the rest of the ions too
-    # Calculate the mean of each ion concentration and fill in the result
+    # Calculate the mean of each ion concentration. Ignore missing observations when averaging so available
+    # measurements can still contribute to the smoothed stream chemistry record.
     result$k_mgl[i] <- mean(k_window, na.rm = TRUE)
     result$mg_mgl[i] <- mean(mg_window, na.rm = TRUE)
     result$ca_mgl[i] <- mean(ca_window, na.rm = TRUE)

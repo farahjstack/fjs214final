@@ -2,24 +2,34 @@ library(tidyverse)
 library(lubridate)
 source("R/moving-average.R")
 
-# Import the four datasets separately
-BQ1 <- read_csv("data/QuebradaCuenca1-Bisley.csv")
-BQ2 <- read_csv("data/QuebradaCuenca2-Bisley.csv")
-BQ3 <- read_csv("data/QuebradaCuenca3-Bisley.csv")
-PRM <- read_csv("data/RioMameyesPuenteRoto.csv")
+# IMPORT DATA ---------------------------------------------------------
+BQ1 <- read_csv("../data/QuebradaCuenca1-Bisley.csv") |>
+  filter(Sample_Date >= ymd("1988-01-01") & Sample_Date <= ymd("1994-12-31"))
 
 
-# Create moving average function
+BQ2 <- read_csv("../data/QuebradaCuenca2-Bisley.csv") |>
+  filter(Sample_Date >= ymd("1988-01-01") & Sample_Date <= ymd("1994-12-31"))
+
+
+BQ3 <- read_csv("../data/QuebradaCuenca3-Bisley.csv") |>
+  filter(Sample_Date >= ymd("1988-01-01") & Sample_Date <= ymd("1994-12-31"))
+
+
+PRM <- read_csv("../data/RioMameyesPuenteRoto.csv") |>
+  filter(Sample_Date >= ymd("1988-01-01") & Sample_Date <= ymd("1994-12-31"))
+
+
+# 9-WEEK MOVING AVERAGE ---------------------------------------------------------
 BQ1_new <- moving_average(df = BQ1)
 BQ2_new <- moving_average(df = BQ2)
 BQ3_new <- moving_average(df = BQ3)
 PRM_new <- moving_average(df = PRM)
 
-# Combine all dfs into a new df
+# Combine the site-level results so all watersheds can be plotted and compared using a single data frame.
 combined <- bind_rows(BQ1_new, BQ2_new, BQ3_new, PRM_new)
 
-# Place values of all sites and all chemistry values into one column:
-plot_data <-
+# RESHAPING ---------------------------------------------------------
+reshape_data <-
   pivot_longer(
     combined,
     cols = c(
@@ -33,4 +43,4 @@ plot_data <-
     values_to = "Concentration"
   )
 
-write_csv(plot_data, "output/cleandata.csv")
+write_csv(reshape_data, "output/cleandata.csv")
