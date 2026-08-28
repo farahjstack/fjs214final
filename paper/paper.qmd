@@ -1,0 +1,55 @@
+---
+title: "EDS214 Final Project"
+format: html
+author: Farah Jehan Stack
+---
+
+# Background
+This project was completed as the final project for EDS 214. The goal of the project is to reproduce Figure 3 from Schaefer et al. (2000), which shows changes in stream-water chemistry before and after Hurricane Hugo across forested watersheds in the Luquillo Experimental Forest in Puerto Rico.
+
+To reproduce the figure, we calculate 9-week moving averages for five stream chemistry variables included in the original figure:
+
+- Potassium (K)
+- Nitrate (NO3)
+- Magnesium (Mg)
+- Calcium (Ca)
+- Ammonium (NH4)
+
+The analysis focuses on the period from 1988 through 1994. This time period allows us to visualize patterns in stream-water chemistry surrounding Hurricane Hugo, which passed over Puerto Rico in September 1989.
+
+# Data
+We use stream chemistry data from four sampling sites: Quebrada Cuenca 1 (BQ1), Quebrada Cuenca 2 (BQ2), Quebrada Cuenca 3 (BQ3), and Río Mameyes at Puente Roto (PRM). The data for each site are imported separately and analyzed using a moving-average function stored in Functions.R.
+
+# Methods
+Our analysis calculates 9-week moving averages of stream chemistry measurements and plots these averages over a time period from 1988-1994.
+
+# Results
+Our results show the moving average of each chemistry variable over time (1988-1994).
+```{r}
+#| echo: false
+#| warning: false
+
+library(tidyverse)
+clean_data <- read_csv("../output/cleandata.csv")
+ggplot(
+  clean_data,
+  mapping = aes(
+    x = window_start,
+    y = Concentration,
+    linetype = Site_Name
+  )
+) +
+  geom_line() +
+  theme_bw() +
+  facet_grid(
+    vars(Ions),
+    scales = "free_y",
+    switch = "y"
+  ) +
+  scale_x_date(
+    name = "Years"
+  ) +
+  labs(
+    title = "Concentrations in Puerto Rico Streams Before and After Hurricane Hugo"
+  )
+```
