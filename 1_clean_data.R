@@ -3,19 +3,19 @@ library(lubridate)
 source("R/moving-average.R")
 
 # IMPORT DATA ---------------------------------------------------------
-BQ1 <- read_csv("../data/QuebradaCuenca1-Bisley.csv") |>
+BQ1 <- read_csv("data/QuebradaCuenca1-Bisley.csv") |>
   filter(Sample_Date >= ymd("1988-01-01") & Sample_Date <= ymd("1994-12-31"))
 
 
-BQ2 <- read_csv("../data/QuebradaCuenca2-Bisley.csv") |>
+BQ2 <- read_csv("data/QuebradaCuenca2-Bisley.csv") |>
   filter(Sample_Date >= ymd("1988-01-01") & Sample_Date <= ymd("1994-12-31"))
 
 
-BQ3 <- read_csv("../data/QuebradaCuenca3-Bisley.csv") |>
+BQ3 <- read_csv("data/QuebradaCuenca3-Bisley.csv") |>
   filter(Sample_Date >= ymd("1988-01-01") & Sample_Date <= ymd("1994-12-31"))
 
 
-PRM <- read_csv("../data/RioMameyesPuenteRoto.csv") |>
+PRM <- read_csv("data/RioMameyesPuenteRoto.csv") |>
   filter(Sample_Date >= ymd("1988-01-01") & Sample_Date <= ymd("1994-12-31"))
 
 

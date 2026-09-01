@@ -30,7 +30,7 @@ Our results show the moving average of each chemistry variable over time (1988-1
 #| warning: false
 
 library(tidyverse)
-clean_data <- read_csv("../output/cleandata.csv")
+clean_data <- read_csv("output/cleandata.csv")
 ggplot(
   clean_data,
   mapping = aes(
